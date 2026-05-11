@@ -1,0 +1,960 @@
+{
+  "OAuth인증.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "OAuth인증",
+        "API 명": "접근토큰발급(P)",
+        "API ID": "인증-001",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "POST",
+        "URL 명": "/oauth2/tokenP",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "OAuth인증",
+        "API 명": "접근토큰폐기(P)",
+        "API ID": "인증-002",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "POST",
+        "URL 명": "/oauth2/revokeP",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "OAuth인증",
+        "API 명": "Hashkey",
+        "API ID": "Hashkey",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/hashkey",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "OAuth인증",
+        "API 명": "실시간 (웹소켓) 접속키 발급",
+        "API ID": "실시간-000",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "POST",
+        "URL 명": "/oauth2/Approval",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      }
+    ]
+  },
+  "[국내주식] 기본시세.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 기본시세",
+        "API 명": "주식현재가 시세",
+        "API ID": "v1_국내주식-008",
+        "실전 TR_ID": "FHKST01010100",
+        "모의 TR_ID": "FHKST01010100",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-price",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 기본시세",
+        "API 명": "주식현재가 체결",
+        "API ID": "v1_국내주식-009",
+        "실전 TR_ID": "FHKST01010300",
+        "모의 TR_ID": "FHKST01010300",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-ccnl",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 기본시세",
+        "API 명": "주식현재가 일자별",
+        "API ID": "v1_국내주식-010",
+        "실전 TR_ID": "FHKST01010400",
+        "모의 TR_ID": "FHKST01010400",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-daily-price",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 기본시세",
+        "API 명": "주식현재가 호가/예상체결",
+        "API ID": "v1_국내주식-011",
+        "실전 TR_ID": "FHKST01010200",
+        "모의 TR_ID": "FHKST01010200",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-asking-price-exp-ccn",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 기본시세",
+        "API 명": "주식현재가 투자자",
+        "API ID": "v1_국내주식-012",
+        "실전 TR_ID": "FHKST01010900",
+        "모의 TR_ID": "FHKST01010900",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-investor",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      }
+    ]
+  },
+  "[국내주식] 순위분석.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 순위분석",
+        "API 명": "거래량순위",
+        "API ID": "v1_국내주식-047",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/volume-rank",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 순위분석",
+        "API 명": "국내주식 등락률 순위",
+        "API ID": "v1_국내주식-088",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/ranking/fluctuation",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 순위분석",
+        "API 명": "국내주식 호가잔량 순위",
+        "API ID": "국내주식-089",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/ranking/quote-balance",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 순위분석",
+        "API 명": "국내주식 수익자산지표 순위",
+        "API ID": "v1_국내주식-090",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/ranking/profit-asset-index",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 순위분석",
+        "API 명": "국내주식 시가총액 상위",
+        "API ID": "v1_국내주식-091",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/ranking/market-cap",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[국내주식] 시세분석.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 시세분석",
+        "API 명": "국내기관_외국인 매매종목가집계",
+        "API ID": "국내주식-037",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/foreign-institution-total",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 시세분석",
+        "API 명": "종목조건검색 목록조회",
+        "API ID": "국내주식-038",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/psearch-title",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 시세분석",
+        "API 명": "종목조건검색조회",
+        "API ID": "국내주식-039",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/psearch-result",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 시세분석",
+        "API 명": "종목별 프로그램매매추이(체결)",
+        "API ID": "v1_국내주식-044",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/program-trade-by-stock",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 시세분석",
+        "API 명": "종목별 외인기관 추정가집계",
+        "API ID": "v1_국내주식-046",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/investor-trend-estimate",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[국내주식] 실시간시세.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[국내주식] 실시간시세",
+        "API 명": "국내주식 실시간체결가 (KRX)",
+        "API ID": "실시간-003",
+        "실전 TR_ID": "H0STCNT0",
+        "모의 TR_ID": "H0STCNT0",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/H0STCNT0",
+        "실전 Domain": " ws://ops.koreainvestment.com:21000",
+        "모의 Domain": " ws://ops.koreainvestment.com:31000"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[국내주식] 실시간시세",
+        "API 명": "국내주식 실시간호가 (KRX)",
+        "API ID": "실시간-004",
+        "실전 TR_ID": "H0STASP0",
+        "모의 TR_ID": "H0STASP0",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/H0STASP0",
+        "실전 Domain": "ws://ops.koreainvestment.com:21000",
+        "모의 Domain": " ws://ops.koreainvestment.com:31000"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[국내주식] 실시간시세",
+        "API 명": "국내주식 실시간체결통보",
+        "API ID": "실시간-005",
+        "실전 TR_ID": "H0STCNI0",
+        "모의 TR_ID": "H0STCNI9",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/H0STCNI0",
+        "실전 Domain": " ws://ops.koreainvestment.com:21000",
+        "모의 Domain": " ws://ops.koreainvestment.com:31000"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[국내주식] 실시간시세",
+        "API 명": "국내주식 실시간회원사 (KRX)",
+        "API ID": "실시간-047",
+        "실전 TR_ID": "H0STMBC0",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/H0STMBC0",
+        "실전 Domain": "ws://ops.koreainvestment.com:21000",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[국내주식] 실시간시세",
+        "API 명": "국내주식 실시간프로그램매매 (KRX)",
+        "API ID": "실시간-048",
+        "실전 TR_ID": "H0STPGM0",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/H0STPGM0",
+        "실전 Domain": "ws://ops.koreainvestment.com:21000",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[국내주식] 업종_기타.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 업종/기타",
+        "API 명": "국내주식업종기간별시세(일/주/월/년)",
+        "API ID": "v1_국내주식-021",
+        "실전 TR_ID": "FHKUP03500100",
+        "모의 TR_ID": "FHKUP03500100",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-daily-indexchartprice",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 업종/기타",
+        "API 명": "국내휴장일조회",
+        "API ID": "국내주식-040",
+        "실전 TR_ID": "CTCA0903R",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/chk-holiday",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 업종/기타",
+        "API 명": "변동성완화장치(VI) 현황",
+        "API ID": "v1_국내주식-055",
+        "실전 TR_ID": "FHPST01390000",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-vi-status",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 업종/기타",
+        "API 명": "업종 분봉조회",
+        "API ID": "v1_국내주식-045",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-time-indexchartprice",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 업종/기타",
+        "API 명": "국내업종 현재지수",
+        "API ID": "v1_국내주식-063",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/inquire-index-price",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[국내주식] 종목정보.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 종목정보",
+        "API 명": "상품기본조회",
+        "API ID": "v1_국내주식-029",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/search-info",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 종목정보",
+        "API 명": "주식기본조회",
+        "API ID": "v1_국내주식-067",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/quotations/search-stock-info",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 종목정보",
+        "API 명": "국내주식 대차대조표",
+        "API ID": "v1_국내주식-078",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/finance/balance-sheet",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 종목정보",
+        "API 명": "국내주식 손익계산서",
+        "API ID": "v1_국내주식-079",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/finance/income-statement",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": NaN
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 종목정보",
+        "API 명": "국내주식 재무비율",
+        "API ID": "v1_국내주식-080",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/finance/financial-ratio",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[국내주식] 주문_계좌.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 주문/계좌",
+        "API 명": "주식주문(현금)",
+        "API ID": "v1_국내주식-001",
+        "실전 TR_ID": "(매도) TTTC0011U (매수) TTTC0012U",
+        "모의 TR_ID": "(매도) VTTC0011U (매수) VTTC0012U",
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/domestic-stock/v1/trading/order-cash",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 주문/계좌",
+        "API 명": "주식주문(신용)",
+        "API ID": "v1_국내주식-002",
+        "실전 TR_ID": "(매도) TTTC0051U (매수) TTTC0052U",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/domestic-stock/v1/trading/order-credit",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 주문/계좌",
+        "API 명": "주식주문(정정취소)",
+        "API ID": "v1_국내주식-003",
+        "실전 TR_ID": "TTTC0013U",
+        "모의 TR_ID": "VTTC0013U",
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/domestic-stock/v1/trading/order-rvsecncl",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 주문/계좌",
+        "API 명": "주식정정취소가능주문조회",
+        "API ID": "v1_국내주식-004",
+        "실전 TR_ID": "TTTC0084R",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/trading/inquire-psbl-rvsecncl",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[국내주식] 주문/계좌",
+        "API 명": "주식일별주문체결조회",
+        "API ID": "v1_국내주식-005",
+        "실전 TR_ID": "(3개월이내) TTTC0081R (3개월이전) CTSC9215R",
+        "모의 TR_ID": "(3개월이내) VTTC0081R (3개월이전) VTSC9215R",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/domestic-stock/v1/trading/inquire-daily-ccld",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[해외주식] 기본시세.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 기본시세",
+        "API 명": "해외주식 현재체결가",
+        "API ID": "v1_해외주식-009",
+        "실전 TR_ID": "HHDFS00000300",
+        "모의 TR_ID": "HHDFS00000300",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/overseas-price/v1/quotations/price",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 기본시세",
+        "API 명": "해외주식 기간별시세",
+        "API ID": "v1_해외주식-010",
+        "실전 TR_ID": "HHDFS76240000",
+        "모의 TR_ID": "HHDFS76240000",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/overseas-price/v1/quotations/dailyprice",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 기본시세",
+        "API 명": "해외주식 종목/지수/환율기간별시세(일/주/월/년)",
+        "API ID": "v1_해외주식-012",
+        "실전 TR_ID": "FHKST03030100",
+        "모의 TR_ID": "FHKST03030100",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/overseas-price/v1/quotations/inquire-daily-chartprice",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 기본시세",
+        "API 명": "해외주식조건검색",
+        "API ID": "v1_해외주식-015",
+        "실전 TR_ID": "HHDFS76410000",
+        "모의 TR_ID": "HHDFS76410000",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/overseas-price/v1/quotations/inquire-search",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 기본시세",
+        "API 명": "해외결제일자조회",
+        "API ID": "해외주식-017",
+        "실전 TR_ID": "CTOS5011R",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/overseas-stock/v1/quotations/countries-holiday",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[해외주식] 시세분석.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 시세분석",
+        "API 명": "해외주식 가격급등락",
+        "API ID": "해외주식-038",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": NaN,
+        "URL 명": "/uapi/overseas-stock/v1/ranking/price-fluct",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "미지원"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 시세분석",
+        "API 명": "해외주식 거래량급증",
+        "API ID": "해외주식-039",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": NaN,
+        "URL 명": "/uapi/overseas-stock/v1/ranking/volume-surge",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "미지원"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 시세분석",
+        "API 명": "해외주식 매수체결강도상위",
+        "API ID": "해외주식-040",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": NaN,
+        "URL 명": "/uapi/overseas-stock/v1/ranking/volume-power",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "미지원"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 시세분석",
+        "API 명": "해외주식 상승율/하락율",
+        "API ID": "해외주식-041",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": NaN,
+        "URL 명": "/uapi/overseas-stock/v1/ranking/updown-rate",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "미지원"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 시세분석",
+        "API 명": "해외주식 신고/신저가",
+        "API ID": "해외주식-042",
+        "실전 TR_ID": NaN,
+        "모의 TR_ID": NaN,
+        "HTTP Method": NaN,
+        "URL 명": "/uapi/overseas-stock/v1/ranking/new-highlow",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "미지원"
+      }
+    ]
+  },
+  "[해외주식] 실시간시세.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[해외주식] 실시간시세",
+        "API 명": "해외주식 실시간체결통보",
+        "API ID": "실시간-009",
+        "실전 TR_ID": "H0GSCNI0",
+        "모의 TR_ID": "H0GSCNI9",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/H0GSCNI0",
+        "실전 Domain": "ws://ops.koreainvestment.com:21000",
+        "모의 Domain": "ws://ops.koreainvestment.com:31000"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[해외주식] 실시간시세",
+        "API 명": "해외주식 실시간지연체결가",
+        "API ID": "실시간-007",
+        "실전 TR_ID": "HDFSCNT0",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/HDFSCNT0",
+        "실전 Domain": "ws://ops.koreainvestment.com:21000",
+        "모의 Domain": "모의투자 미지원"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[해외주식] 실시간시세",
+        "API 명": "해외주식 실시간지연호가(아시아)",
+        "API ID": "실시간-008",
+        "실전 TR_ID": "HDFSASP1",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/HDFSASP1",
+        "실전 Domain": "ws://ops.koreainvestment.com:21000",
+        "모의 Domain": "제공 안함"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "WEBSOCKET",
+        "메뉴 위치": "[해외주식] 실시간시세",
+        "API 명": "해외주식 실시간호가(미국)",
+        "API ID": "실시간-021",
+        "실전 TR_ID": "HDFSASP0",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "POST",
+        "URL 명": "/tryitout/HDFSASP0",
+        "실전 Domain": "ws://ops.koreainvestment.com:21000",
+        "모의 Domain": "모의투자 미지원"
+      }
+    ]
+  },
+  "[해외주식] 주문_계좌.xlsx": {
+    "columns": [
+      "순번",
+      "API 통신방식",
+      "메뉴 위치",
+      "API 명",
+      "API ID",
+      "실전 TR_ID",
+      "모의 TR_ID",
+      "HTTP Method",
+      "URL 명",
+      "실전 Domain",
+      "모의 Domain"
+    ],
+    "sample_data": [
+      {
+        "순번": 1,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 주문/계좌",
+        "API 명": "해외주식 주문",
+        "API ID": "v1_해외주식-001",
+        "실전 TR_ID": "(미국매수) TTTT1002U  (미국매도) TTTT1006U (아시아 국가 하단 규격서 참고)",
+        "모의 TR_ID": "(미국매수) VTTT1002U  (미국매도) VTTT1001U  (아시아 국가 하단 규격서 참고)",
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/overseas-stock/v1/trading/order",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 2,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 주문/계좌",
+        "API 명": "해외주식 정정취소주문",
+        "API ID": "v1_해외주식-003",
+        "실전 TR_ID": "(미국 정정·취소) TTTT1004U (아시아 국가 하단 규격서 참고)",
+        "모의 TR_ID": "(미국 정정·취소) VTTT1004U (아시아 국가 하단 규격서 참고)",
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/overseas-stock/v1/trading/order-rvsecncl",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 3,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 주문/계좌",
+        "API 명": "해외주식 예약주문접수",
+        "API ID": "v1_해외주식-002",
+        "실전 TR_ID": "(미국예약매수) TTTT3014U  (미국예약매도) TTTT3016U   (중국/홍콩/일본/베트남 예약주문) TTTS3013U",
+        "모의 TR_ID": "(미국예약매수) VTTT3014U  (미국예약매도) VTTT3016U   (중국/홍콩/일본/베트남 예약주문) VTTS3013U",
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/overseas-stock/v1/trading/order-resv",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 4,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 주문/계좌",
+        "API 명": "해외주식 예약주문접수취소",
+        "API ID": "v1_해외주식-004",
+        "실전 TR_ID": "(미국 예약주문 취소접수) TTTT3017U (아시아국가 미제공)",
+        "모의 TR_ID": "(미국 예약주문 취소접수) VTTT3017U (아시아국가 미제공)",
+        "HTTP Method": "POST",
+        "URL 명": "/uapi/overseas-stock/v1/trading/order-resv-ccnl",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "https://openapivts.koreainvestment.com:29443"
+      },
+      {
+        "순번": 5,
+        "API 통신방식": "REST",
+        "메뉴 위치": "[해외주식] 주문/계좌",
+        "API 명": "해외주식 미체결내역",
+        "API ID": "v1_해외주식-005",
+        "실전 TR_ID": "TTTS3018R",
+        "모의 TR_ID": "모의투자 미지원",
+        "HTTP Method": "GET",
+        "URL 명": "/uapi/overseas-stock/v1/trading/inquire-nccs",
+        "실전 Domain": "https://openapi.koreainvestment.com:9443",
+        "모의 Domain": "미지원"
+      }
+    ]
+  }
+}
