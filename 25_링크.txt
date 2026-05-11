@@ -1,4 +1,0 @@
-25차시
-3-2 Chat GPT 프롬프트로 빠르게 필터링
-(2) Colab
-https://colab.research.google.com/drive/1GfycAwUnL9ByT4KlbfUnT4lth40OWQqF?usp=sharing

@@ -1,9 +1,0 @@
-streamlit
-yfinance
-pandas
-openpyxl
-openai
-requests
-numpy
-lxml
-beautifulsoup4
