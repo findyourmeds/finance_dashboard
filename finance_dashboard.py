@@ -138,12 +138,12 @@ def page_api_edu():
 
     with t3:
         st.subheader("📂 33번 폴더 엑셀 명세서 내역")
-        if os.path.exists('excel_analysis.json'):
-            with open('excel_analysis.json', 'r', encoding='utf-8') as f:
+        if os.path.exists('33_excel_analysis.json'):
+            with open('33_excel_analysis.json', 'r', encoding='utf-8') as f:
                 specs = json.load(f)
                 file_sel = st.selectbox("조회할 파일", list(specs.keys()))
                 st.dataframe(pd.DataFrame(specs[file_sel]["sample_data"]), width='stretch')
-        else: st.warning("analyze_excel.py를 실행하여 데이터를 추출해 주세요.")
+        else: st.warning("33_analyze_excel.py를 실행하여 데이터를 추출해 주세요.")
 
 # --- 페이지 5: 최종 자동 매매 시스템 (35) ---
 def page_trading_system(api_key, model):

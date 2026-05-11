@@ -1,0 +1,8 @@
+21차시
+[필수 데이터 분석 툴과 데이터 개요] 분석
+Tool의 응용(2) - GPT API 와 ChatGPT의 차이와 특징
+주요 실습 / 웹사이트
+(1) 실습 시트 주소 가져오기 
+https://docs.google.com/spreadsheets/d/1fqsUBKIrBgIhnRSQPM-tX9UB-dPFRcLf8Ph_N2ITRJw/edit?gid=0#gid=0
+
+https://fastcampus-21.streamlit.app/

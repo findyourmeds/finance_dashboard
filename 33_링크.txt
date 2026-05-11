@@ -1,0 +1,11 @@
+33 AI로 기업 해부하기 106 15차시 API를 이용한 거래의 개요 및 문서 이해.ko_재작성
+15차시 [증권사 API 환경구성]
+API를 이용한 거래의 개요 및 문서 이해
+주요 실습 / 웹사이트
+(1) 증권사 API 개발자센터 
+https://apiportal.koreainvestment.com/intro
+(2) Git 
+https://github.com/koreainvestment/open-trading-api
+주요 실습 / 웹사이트
+(1) 한국투자증권 
+API https://a68cfbb3-b980-4128-9b49-4a2b8cf8d6eb.usrfiles.com/archives/a68cfb_b9a9cf9d4ab74d3684b08c1172c4196a.zip
