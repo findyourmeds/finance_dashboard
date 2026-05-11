@@ -11,19 +11,26 @@ import pandas as pd
 import yfinance as yf
 from datetime import datetime, timedelta
 import time
+import io
 
 # ------------------------------------------------
 # 0. 유틸리티 : 위키피디아에서 티커 목록 가져오기
 # ------------------------------------------------
 def get_sp500_symbols():
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-    table = pd.read_html(url, match="Symbol")[0]
+    import requests
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    r = requests.get(url, headers=headers)
+    table = pd.read_html(io.StringIO(r.text), match="Symbol")[0]
     return table["Symbol"].tolist()
 
 def get_nasdaq100_symbols():
     url = "https://en.wikipedia.org/wiki/Nasdaq-100"
+    import requests
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    r = requests.get(url, headers=headers)
     # 여러 표 중 'Ticker' 열이 있는 첫 번째 표 선택
-    for tbl in pd.read_html(url):
+    for tbl in pd.read_html(io.StringIO(r.text)):
         col_names = [str(c).lower() for c in tbl.columns]
         if any("ticker" in c for c in col_names):
             return tbl[tbl.columns[col_names.index("ticker")]].tolist()

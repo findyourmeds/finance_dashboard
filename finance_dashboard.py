@@ -5,6 +5,7 @@ from openai import OpenAI
 import io
 from datetime import datetime, timedelta
 import time
+import requests
 
 # [LOG: 20260511_1036]
 # 통합 금융 대시보드 v1.0
@@ -64,17 +65,29 @@ def get_ai_analysis(api_key, model, prompt):
 @st.cache_data
 def get_sp500_symbols():
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-    table = pd.read_html(url, match="Symbol")[0]
-    return table["Symbol"].tolist()
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    try:
+        response = requests.get(url, headers=headers)
+        table = pd.read_html(io.StringIO(response.text), match="Symbol")[0]
+        return table["Symbol"].str.replace('.', '-', regex=False).tolist()
+    except Exception as e:
+        st.error(f"S&P 500 목록 가져오기 실패: {e}")
+        return ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]
 
 @st.cache_data
 def get_nasdaq100_symbols():
     url = "https://en.wikipedia.org/wiki/Nasdaq-100"
-    for tbl in pd.read_html(url):
-        col_names = [str(c).lower() for c in tbl.columns]
-        if any("ticker" in c for c in col_names):
-            return tbl[tbl.columns[col_names.index("ticker")]].tolist()
-    return []
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    try:
+        response = requests.get(url, headers=headers)
+        for tbl in pd.read_html(io.StringIO(response.text)):
+            col_names = [str(c).lower() for c in tbl.columns]
+            if any("ticker" in c for c in col_names):
+                target_col = tbl.columns[col_names.index([c for c in col_names if "ticker" in c][0])]
+                return tbl[target_col].str.replace('.', '-', regex=False).tolist()
+    except Exception as e:
+        st.error(f"나스닥 100 목록 가져오기 실패: {e}")
+    return ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META"]
 
 # --- 페이지 로직 ---
 def show_stock_info():
@@ -95,7 +108,7 @@ def show_stock_info():
                 if not df.empty:
                     st.line_chart(df['Close'])
                     df_renamed = df.rename(columns=STOCK_COLUMNS_KR)
-                    st.dataframe(df_renamed.tail(20), column_config=stock_col_config, use_container_width=True)
+                    st.dataframe(df_renamed.tail(20), column_config=stock_col_config, width='stretch')
             
             with tab2:
                 tk = yf.Ticker(tkr)
@@ -106,7 +119,7 @@ def show_stock_info():
                         if not f_df.empty:
                             valid_cols = [c for c in f_df.columns if c in FINANCIALS_KR]
                             f_df = f_df[valid_cols].rename(columns=FINANCIALS_KR)
-                            st.dataframe(f_df, column_config=fin_col_config)
+                            st.dataframe(f_df, column_config=fin_col_config, width='stretch')
             st.divider()
 
 def show_ai_analysis(api_key, model):
