@@ -1,0 +1,2 @@
+https://fastcampus-19.streamlit.app/
+https://fastcampus-21.streamlit.app/

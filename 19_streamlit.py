@@ -129,7 +129,7 @@ def main():
                 # [LOG: 20260511_0913] 스피너 추가
                 with st.spinner(f"'{display_name}' 주가 데이터를 불러오는 중... ⏳"):
                     price_df = get_stock_price(tkr, start_date, end_date)
-                st.dataframe(price_df, column_config=stock_col_config)
+                st.dataframe(price_df, column_config=stock_col_config, width='stretch')
                 
                 # CSV 다운로드 버튼
                 csv = price_df.to_csv().encode('utf-8-sig')
@@ -154,11 +154,11 @@ def main():
                 
                 tab1, tab2, tab3 = st.tabs(["재무상태표", "손익계산서", "현금흐름표"])
                 with tab1:
-                    st.dataframe(bs, column_config=fin_col_config)
+                    st.dataframe(bs, column_config=fin_col_config, width='stretch')
                 with tab2:
-                    st.dataframe(inc, column_config=fin_col_config)
+                    st.dataframe(inc, column_config=fin_col_config, width='stretch')
                 with tab3:
-                    st.dataframe(cf, column_config=fin_col_config)
+                    st.dataframe(cf, column_config=fin_col_config, width='stretch')
                     
                 # 엑셀 다운로드 버튼
                 excel_buffer = io.BytesIO()

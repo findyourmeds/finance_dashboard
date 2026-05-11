@@ -105,7 +105,22 @@ def main():
     # 사이드바
     st.sidebar.header("🔑 AI & 조회 설정")
     api_key = st.sidebar.text_input("OpenAI API Key", type="password")
-    model_option = st.sidebar.selectbox("GPT 모델", ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"])
+    
+    # [LOG: 20260511_1020] 최신 모델 라인업으로 업데이트
+    model_options = {
+        "gpt-4o": "가장 똑똑하고 빠름 (범용 최고)",
+        "gpt-4o-mini": "저렴하고 매우 빠름 (단순 요약용)",
+        "o1-preview": "복잡한 추론 및 수학 전문 (느리지만 정확)",
+        "o1-mini": "추론 특화 모델의 소형 버전",
+        "gpt-4-turbo": "이전 세대 고성능 모델"
+    }
+    
+    selected_model_name = st.sidebar.selectbox(
+        "GPT 모델 선택", 
+        options=list(model_options.keys()),
+        help="모델별 특징:\n" + "\n".join([f"- {k}: {v}" for k, v in model_options.items()])
+    )
+    model_option = selected_model_name # 실제 API 호출에 사용될 변수명 유지
     
     st.sidebar.divider()
     tickers_input = st.sidebar.text_input("티커 입력 (쉼표 구분)", value="TSLA, AAPL, NVDA")
@@ -164,11 +179,21 @@ def main():
                 if st.button(f"{company_name} AI 이슈 분석") and api_key:
                     with st.spinner("AI가 최신 뉴스를 분석 중..."):
                         tk = yf.Ticker(tkr)
-                        news = tk.news[:3]
-                        news_text = "\n".join([f"- {n['title']}" for n in news])
-                        prompt = f"{display_name} 종목의 최근 뉴스입니다:\n{news_text}\n\n이 뉴스들을 종합하여 주요 이슈를 3줄로 요약하고, 투자 심리에 미칠 영향을 평가해줘."
-                        analysis_result = get_ai_analysis(api_key, model_option, prompt)
-                        st.info(analysis_result)
+                        news = tk.news[:5] # 넉넉하게 5개 가져오기
+                        
+                        if news:
+                            # title 키가 없을 경우를 대비해 .get() 사용
+                            news_list = []
+                            for n in news:
+                                title = n.get('title') or n.get('headline') or "제목 정보 없음"
+                                news_list.append(f"- {title}")
+                            
+                            news_text = "\n".join(news_list)
+                            prompt = f"{display_name} 종목의 최근 뉴스입니다:\n{news_text}\n\n이 뉴스들을 종합하여 주요 이슈를 3줄로 요약하고, 투자 심리에 미칠 영향을 평가해줘."
+                            analysis_result = get_ai_analysis(api_key, model_option, prompt)
+                            st.info(analysis_result)
+                        else:
+                            st.warning("최근 분석할 뉴스가 없습니다.")
 
             # 주가 & 재무제표
             tab_price, tab_fin = st.tabs(["주가 차트", "재무제표"])
@@ -176,14 +201,14 @@ def main():
             with tab_price:
                 price_df = get_stock_price(tkr, period)
                 st.line_chart(price_df['종가'])
-                st.dataframe(price_df.tail(20), column_config=stock_col_config, use_container_width=True)
+                st.dataframe(price_df.tail(20), column_config=stock_col_config, width='stretch')
 
             with tab_fin:
                 bs, inc, cf = get_financial_statements(tkr)
                 f_tab1, f_tab2, f_tab3 = st.tabs(["재무상태표", "손익계산서", "현금흐름표"])
-                with f_tab1: st.dataframe(bs, column_config=fin_col_config)
-                with f_tab2: st.dataframe(inc, column_config=fin_col_config)
-                with f_tab3: st.dataframe(cf, column_config=fin_col_config)
+                with f_tab1: st.dataframe(bs, column_config=fin_col_config, width='stretch')
+                with f_tab2: st.dataframe(inc, column_config=fin_col_config, width='stretch')
+                with f_tab3: st.dataframe(cf, column_config=fin_col_config, width='stretch')
             
             st.divider()
 
