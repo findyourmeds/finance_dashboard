@@ -1,4 +1,8 @@
+# Ignore all text files except requirements.txt
 *.txt
+!requirements.txt
+
+# Ignore data and temp files
 *.xlsx
 *.csv
 __pycache__/
