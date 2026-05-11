@@ -6,10 +6,11 @@ import io
 from datetime import datetime, timedelta
 import time
 import requests
+import numpy as np
 
-# [LOG: 20260511_1036]
-# 통합 금융 대시보드 v1.0
-# 기능: 19차시(주가/재무), 21차시(AI분석), 25차시(종목 필터링) 통합
+# [LOG: 20260511_1115]
+# 통합 금융 대시보드 v1.1
+# 업데이트: 메뉴 이름에 강의 번호 추가 및 33, 35차시 통합
 
 # --- 사전 정의 (번역 및 설정) ---
 STOCK_COLUMNS_KR = {
@@ -61,37 +62,30 @@ def get_ai_analysis(api_key, model, prompt):
     except Exception as e:
         return f"AI 분석 중 오류 발생: {e}"
 
-# --- 25차시용 유틸리티 ---
+# --- 유틸리티 ---
 @st.cache_data
 def get_sp500_symbols():
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-    try:
-        response = requests.get(url, headers=headers)
-        table = pd.read_html(io.StringIO(response.text), match="Symbol")[0]
-        return table["Symbol"].str.replace('.', '-', regex=False).tolist()
-    except Exception as e:
-        st.error(f"S&P 500 목록 가져오기 실패: {e}")
-        return ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    r = requests.get(url, headers=headers)
+    table = pd.read_html(io.StringIO(r.text), match="Symbol")[0]
+    return table["Symbol"].str.replace('.', '-', regex=False).tolist()
 
 @st.cache_data
 def get_nasdaq100_symbols():
     url = "https://en.wikipedia.org/wiki/Nasdaq-100"
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-    try:
-        response = requests.get(url, headers=headers)
-        for tbl in pd.read_html(io.StringIO(response.text)):
-            col_names = [str(c).lower() for c in tbl.columns]
-            if any("ticker" in c for c in col_names):
-                target_col = tbl.columns[col_names.index([c for c in col_names if "ticker" in c][0])]
-                return tbl[target_col].str.replace('.', '-', regex=False).tolist()
-    except Exception as e:
-        st.error(f"나스닥 100 목록 가져오기 실패: {e}")
-    return ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META"]
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    r = requests.get(url, headers=headers)
+    for tbl in pd.read_html(io.StringIO(r.text)):
+        col_names = [str(c).lower() for c in tbl.columns]
+        if any("ticker" in c for c in col_names):
+            target_col = tbl.columns[col_names.index([c for c in col_names if "ticker" in c][0])]
+            return tbl[target_col].str.replace('.', '-', regex=False).tolist()
+    return []
 
 # --- 페이지 로직 ---
 def show_stock_info():
-    st.header("📈 주가 및 재무제표 조회")
+    st.header("📈 주가 및 재무제표 조회 (19차시)")
     tickers_input = st.sidebar.text_input("티커 입력 (쉼표 구분)", value="TSLA, AAPL", key="tk_input")
     start_date = st.sidebar.date_input("시작일", value=datetime.now() - timedelta(days=365), key="s_date")
     end_date = st.sidebar.date_input("종료일", value=datetime.now(), key="e_date")
@@ -101,15 +95,12 @@ def show_stock_info():
         for tkr in tickers:
             company_name = COMPANY_NAMES_KR.get(tkr, tkr)
             st.subheader(f"🔍 {company_name} ({tkr})")
-            
             tab1, tab2 = st.tabs(["주가 데이터", "재무제표"])
             with tab1:
                 df = yf.download(tkr, start=start_date, end=end_date, progress=False)
                 if not df.empty:
                     st.line_chart(df['Close'])
-                    df_renamed = df.rename(columns=STOCK_COLUMNS_KR)
-                    st.dataframe(df_renamed.tail(20), column_config=stock_col_config, width='stretch')
-            
+                    st.dataframe(df.rename(columns=STOCK_COLUMNS_KR).tail(20), column_config=stock_col_config, use_container_width=True)
             with tab2:
                 tk = yf.Ticker(tkr)
                 bs, inc, cf = tk.balance_sheet.T, tk.financials.T, tk.cashflow.T
@@ -118,122 +109,108 @@ def show_stock_info():
                     with f_tab:
                         if not f_df.empty:
                             valid_cols = [c for c in f_df.columns if c in FINANCIALS_KR]
-                            f_df = f_df[valid_cols].rename(columns=FINANCIALS_KR)
-                            st.dataframe(f_df, column_config=fin_col_config, width='stretch')
+                            st.dataframe(f_df[valid_cols].rename(columns=FINANCIALS_KR), column_config=fin_col_config)
             st.divider()
 
 def show_ai_analysis(api_key, model):
-    st.header("🤖 AI 시장 분석")
-    if not api_key:
-        st.warning("OpenAI API Key를 입력해 주세요.")
-        return
-
+    st.header("🤖 AI 시장 분석 (21차시)")
+    if not api_key: st.warning("API Key를 입력해 주세요."); return
     if st.button("실시간 글로벌 시황 요약"):
         with st.spinner("분석 중..."):
             indices = {"S&P 500": "^GSPC", "KOSPI": "^KS11", "나스닥": "^IXIC"}
             summary = ""
             for name, tkr in indices.items():
                 data = yf.download(tkr, period="5d", progress=False)
-                last = data['Close'].iloc[-1].item()
-                prev = data['Close'].iloc[-2].item()
-                change = ((last - prev) / prev) * 100
-                summary += f"{name}: {last:.2f} ({change:+.2f}%)\n"
-            
-            res = get_ai_analysis(api_key, model, f"시장 현황:\n{summary}\n\n위 데이터를 분석하고 투자 조언을 해줘.")
-            st.success(res)
+                last, prev = data['Close'].iloc[-1].item(), data['Close'].iloc[-2].item()
+                summary += f"{name}: {last:.2f} ({(last-prev)/prev*100:+.2f}%)\n"
+            st.success(get_ai_analysis(api_key, model, f"시장 현황:\n{summary}\n\n위 데이터를 분석하고 투자 조언을 해줘."))
 
 def show_screening():
-    st.header("🔍 스마트 종목 필터링")
-    st.info("S&P 500 및 Nasdaq-100 종목 중 특정 조건을 만족하는 기업을 찾습니다.")
-    
+    st.header("🔍 스마트 종목 필터링 (25차시)")
     col1, col2 = st.columns(2)
     with col1:
         growth_limit = st.number_input("최소 성장률 (%)", value=20)
         per_limit = st.number_input("최대 PER", value=30)
     with col2:
         peg_limit = st.number_input("최대 PEG", value=1.0)
-        keyword = st.text_input("필수 키워드 (예: battery, recycling)", value="battery")
+        keyword = st.text_input("필수 키워드", value="battery")
 
     if st.button("스크리닝 시작"):
-        with st.spinner("전체 종목을 스캔 중입니다... (시간이 다소 소요될 수 있습니다)"):
-            sp500 = get_sp500_symbols()
-            nasdaq100 = get_nasdaq100_symbols()
-            universe = sorted(set(sp500 + nasdaq100))[:50] # 시연을 위해 50개로 제한
-            
+        with st.spinner("스캔 중..."):
+            universe = sorted(set(get_sp500_symbols() + get_nasdaq100_symbols()))[:30]
             passed = []
             one_month = datetime.utcnow() - timedelta(days=30)
-            
             for tkr in universe:
                 try:
                     tic = yf.Ticker(tkr)
-                    
-                    # 1. QoQ 매출 및 영업이익 성장 (20% 이상)
                     q_is = tic.quarterly_income_stmt
-                    if q_is is None or q_is.shape[1] < 2: continue
-                    
                     rev_row = next((idx for idx in q_is.index if "revenue" in idx.lower()), None)
-                    op_row  = next((idx for idx in q_is.index if "operating" in idx.lower() and "income" in idx.lower()), None)
-                    
+                    op_row = next((idx for idx in q_is.index if "operating" in idx.lower() and "income" in idx.lower()), None)
                     if not rev_row or not op_row: continue
-                    
-                    rev = q_is.loc[rev_row].iloc[:2]
-                    op_inc = q_is.loc[op_row].iloc[:2]
-                    
-                    rev_g = (rev.iloc[0] - rev.iloc[1]) / abs(rev.iloc[1])
-                    op_g = (op_inc.iloc[0] - op_inc.iloc[1]) / abs(op_inc.iloc[1])
-                    
-                    if rev_g < (growth_limit / 100) or op_g < (growth_limit / 100): continue
-                    
-                    # 2. 키워드 필터링 (사업 요약에 키워드 포함 여부)
+                    rev_g = (q_is.loc[rev_row].iloc[0] - q_is.loc[rev_row].iloc[1]) / abs(q_is.loc[rev_row].iloc[1])
+                    op_g = (q_is.loc[op_row].iloc[0] - q_is.loc[op_row].iloc[1]) / abs(q_is.loc[op_row].iloc[1])
+                    if rev_g < (growth_limit/100) or op_g < (growth_limit/100): continue
                     info = tic.info
-                    summary = (info.get("longBusinessSummary") or "").lower()
-                    if keyword.lower() not in summary: continue
-                    
-                    # 3. 투자 지표 필터링 (PER, PEG)
-                    pe = info.get("trailingPE")
-                    peg = info.get("pegRatio")
+                    if keyword.lower() not in (info.get("longBusinessSummary") or "").lower(): continue
+                    pe, peg = info.get("trailingPE"), info.get("pegRatio")
                     if pe is None or peg is None or pe > per_limit or peg > peg_limit: continue
-                    
-                    # 4. 최근 뉴스 개수 필터링 (최근 30일 뉴스 3개 이상)
-                    news_items = tic.news or []
-                    recent_news = [n for n in news_items if datetime.utcfromtimestamp(n.get("providerPublishTime", 0)) >= one_month]
-                    if len(recent_news) < 3: continue
-                    
-                    passed.append({
-                        "Ticker": tkr, 
-                        "매출 성장(%)": round(rev_g*100, 1), 
-                        "영업익 성장(%)": round(op_g*100, 1),
-                        "PER": pe, 
-                        "PEG": peg,
-                        "뉴스(30일)": len(recent_news)
-                    })
-                    time.sleep(0.1)
+                    news = [n for n in (tic.news or []) if datetime.utcfromtimestamp(n.get("providerPublishTime", 0)) >= one_month]
+                    if len(news) < 3: continue
+                    passed.append({"Ticker": tkr, "매출성장": f"{rev_g*100:.1f}%", "PER": pe, "뉴스": len(news)})
                 except: continue
-            
-            if passed:
-                st.write(f"✅ {len(passed)}개의 종목이 발견되었습니다.")
-                st.table(pd.DataFrame(passed))
-            else:
-                st.warning("조건을 만족하는 종목이 없습니다.")
+            if passed: st.table(pd.DataFrame(passed))
+            else: st.warning("조건 만족 종목 없음")
 
-# --- 메인 렌더링 ---
+def show_api_intro():
+    st.header("📡 API 자동매매 입문 (33차시)")
+    tab1, tab2, tab3 = st.tabs(["개념 이해", "매매 시뮬레이터", "준비 체크리스트"])
+    with tab1:
+        st.info("**API 거래란?** 사람이 화면을 보고 주문하는 대신, 코드가 직접 증권사 서버와 데이터를 주고받으며 매매하는 방식입니다.")
+        st.code("내 컴퓨터 --(주가요청)--> 증권사 서버\n내 컴퓨터 <--(현재가)---- 증권사 서버\n내 컴퓨터 --(매수주문)--> 증권사 서버", language="text")
+    with tab2:
+        buy_p = st.number_input("매수가", value=100.0)
+        tp = st.slider("익절(%)", 1, 30, 10)
+        sl = st.slider("손절(%)", 1, 30, 5)
+        if st.button("시뮬레이션 실행"):
+            prices = [buy_p * (1 + np.random.normal(0, 0.02)) for _ in range(20)]
+            st.line_chart(prices)
+            final = prices[-1]
+            st.write(f"최종가: {final:.2f} | 결과: {'✅ 익절' if final >= buy_p*(1+tp/100) else '❌ 손절' if final <= buy_p*(1-sl/100) else '⌛ 유지'}")
+    with tab3:
+        for s in ["계좌 개설", "API 서비스 신청", "모의계좌 발급", "API Key 저장"]: st.checkbox(s)
+
+def show_trading_algo():
+    st.header("⚙️ 나만의 매매 알고리즘 (35차시)")
+    st.write("투자 성향에 맞춘 자동 매매 봇의 파라미터를 설정합니다.")
+    with st.expander("🛠️ 알고리즘 파라미터 설정", expanded=True):
+        col1, col2 = st.columns(2)
+        with col1:
+            st.selectbox("대상 시장", ["국내 주식 (KOSPI/KOSDAQ)", "미국 주식 (NYSE/NASDAQ)"])
+            st.number_input("종목당 최대 투자 금액 (원/$)", value=1000000)
+        with col2:
+            st.slider("익절 기준 (%)", 1, 50, 5)
+            st.slider("손절 기준 (%)", 1, 50, 3)
+        st.text_area("GPT에게 전달할 투자 전략 가이드", value="5분봉 기준 골든크로스 발생 시 매수, 장 종료 30분 전 전량 매도")
+    st.info("💡 위 설정값들은 Google 스프레드시트와 연동되어 자동 매매 봇이 실시간으로 참조하게 됩니다.")
+
 def main():
     st.set_page_config(page_title="통합 금융 대시보드", layout="wide")
-    
-    st.sidebar.title("📁 메뉴")
-    menu = st.sidebar.radio("이동할 페이지", ["주가/재무제표", "AI 시장 분석", "종목 필터링"])
-    
+    st.sidebar.title("📁 강의별 메뉴")
+    menu = st.sidebar.radio("이동할 페이지", [
+        "📈 주가 및 재무제표 (19차시)", 
+        "🤖 AI 시장 분석 (21차시)", 
+        "🔍 종목 필터링 (25차시)",
+        "📡 API 자동매매 입문 (33차시)",
+        "⚙️ 나만의 매매 알고리즘 (35차시)"
+    ])
     st.sidebar.divider()
-    st.sidebar.header("🔑 API 설정")
     api_key = st.sidebar.text_input("OpenAI API Key", type="password")
     model = st.sidebar.selectbox("모델", ["gpt-4o", "gpt-3.5-turbo"])
     
-    if menu == "주가/재무제표":
-        show_stock_info()
-    elif menu == "AI 시장 분석":
-        show_ai_analysis(api_key, model)
-    elif menu == "종목 필터링":
-        show_screening()
+    if "19차시" in menu: show_stock_info()
+    elif "21차시" in menu: show_ai_analysis(api_key, model)
+    elif "25차시" in menu: show_screening()
+    elif "33차시" in menu: show_api_intro()
+    elif "35차시" in menu: show_trading_algo()
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": main()
