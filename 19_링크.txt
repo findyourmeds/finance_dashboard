@@ -1,0 +1,8 @@
+19차시
+Part 2. AI와 함께 배우는 실전 재무 분석 & 투자 리서치
+[필수 데이터 분석 툴과 데이터 개요]
+분석Tool의 이해 - 기초 데이터 수집을 위한 ChatGPT-Colab 활용
+(1) 코랩 - 야후파이낸스
+https://colab.research.google.com/drive/1BwzA0XAOgfC57DnVnetZw9IsIhXVRbx3?usp=sharing
+
+https://fastcampus-19.streamlit.app/

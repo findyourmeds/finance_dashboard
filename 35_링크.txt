@@ -1,0 +1,16 @@
+35_링크 AI로 기업 해부하기 113 16차시 나의 투자성향에 맞춘 거래 알고리즘 추천   ChatGPT.ko_재작성
+
+(2) 투자성향분석 자료
+[자동 투자봇의 알고리즘 설계] 나의 투자성향에 맞춘 거래 알고리즘 추천
+주요 실습 / 웹사이트
+(1) 한국투자증권 API
+(2) 자동투자봇 시트 
+https://docs.google.com/spreadsheets/d/1iR7jTfOdhFhQZsvAygRCpGh7T5-A3yc3DSlqq5Y8Bec/edit?usp=sharing
+(3) 자동투자봇 코랩 
+https://colab.research.google.com/drive/1eCT85q937KjucqvOeP3na-BXxF_miVjs?usp=sharing
+(4) GPT 
+https://chatgpt.com/share/682f970f-a220-800d-bb8d-ae76eacf22b1
+(5) 한국투자증권 API 문서 (GPT 제작 용 일체 문서) https://apiportal.koreainvestment.com/apiservice-summary
+(6) 드라이브에 업로드할 승인자료(내용 변경 필요) 
+https://a68cfbb3-b980-4128-9b49-
+4a2b8cf8d6eb.usrfiles.com/archives/a68cfb_0498b0b5772d4276a0f36ae7ab9c25ce.zip
