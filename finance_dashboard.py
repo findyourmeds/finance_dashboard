@@ -153,25 +153,47 @@ def show_screening():
             for tkr in universe:
                 try:
                     tic = yf.Ticker(tkr)
-                    # 1. QoQ 성장
+                    
+                    # 1. QoQ 매출 및 영업이익 성장 (20% 이상)
                     q_is = tic.quarterly_income_stmt
                     if q_is is None or q_is.shape[1] < 2: continue
-                    rev_row = next((idx for idx in q_is.index if "revenue" in idx.lower()), None)
-                    if not rev_row: continue
-                    rev = q_is.loc[rev_row].iloc[:2]
-                    rev_g = (rev.iloc[0] - rev.iloc[1]) / abs(rev.iloc[1])
-                    if rev_g < (growth_limit / 100): continue
                     
-                    # 2. 키워드 & 지표
+                    rev_row = next((idx for idx in q_is.index if "revenue" in idx.lower()), None)
+                    op_row  = next((idx for idx in q_is.index if "operating" in idx.lower() and "income" in idx.lower()), None)
+                    
+                    if not rev_row or not op_row: continue
+                    
+                    rev = q_is.loc[rev_row].iloc[:2]
+                    op_inc = q_is.loc[op_row].iloc[:2]
+                    
+                    rev_g = (rev.iloc[0] - rev.iloc[1]) / abs(rev.iloc[1])
+                    op_g = (op_inc.iloc[0] - op_inc.iloc[1]) / abs(op_inc.iloc[1])
+                    
+                    if rev_g < (growth_limit / 100) or op_g < (growth_limit / 100): continue
+                    
+                    # 2. 키워드 필터링 (사업 요약에 키워드 포함 여부)
                     info = tic.info
                     summary = (info.get("longBusinessSummary") or "").lower()
                     if keyword.lower() not in summary: continue
                     
+                    # 3. 투자 지표 필터링 (PER, PEG)
                     pe = info.get("trailingPE")
                     peg = info.get("pegRatio")
                     if pe is None or peg is None or pe > per_limit or peg > peg_limit: continue
                     
-                    passed.append({"Ticker": tkr, "성장률(%)": round(rev_g*100, 1), "PER": pe, "PEG": peg})
+                    # 4. 최근 뉴스 개수 필터링 (최근 30일 뉴스 3개 이상)
+                    news_items = tic.news or []
+                    recent_news = [n for n in news_items if datetime.utcfromtimestamp(n.get("providerPublishTime", 0)) >= one_month]
+                    if len(recent_news) < 3: continue
+                    
+                    passed.append({
+                        "Ticker": tkr, 
+                        "매출 성장(%)": round(rev_g*100, 1), 
+                        "영업익 성장(%)": round(op_g*100, 1),
+                        "PER": pe, 
+                        "PEG": peg,
+                        "뉴스(30일)": len(recent_news)
+                    })
                     time.sleep(0.1)
                 except: continue
             
