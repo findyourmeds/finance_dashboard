@@ -1,0 +1,10 @@
+*.txt
+*.xlsx
+*.csv
+__pycache__/
+.env
+.DS_Store
+.gemini/
+.devcontainer/
+excel_analysis.json
+33_excel_analysis.json
